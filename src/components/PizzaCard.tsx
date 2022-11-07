@@ -1,27 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 
-const PizzaCard: React.FC = () => {
+export interface PizzaCardProps {
+  imageUrl: string;
+  title: string;
+  types: Array<0 | 1 | 2>;
+  sizes: Array<26 | 30 | 40>;
+  price: number;
+  category: number;
+  rating: number;
+}
+
+const typeNames = ["тонкое", "традиционное"];
+
+const PizzaCard: React.FC<PizzaCardProps> = (props) => {
+  const { imageUrl, title, types, sizes, price } = props;
+
+  const [activeType, setActiveType] = useState<number>();
+  const [activeSize, setActiveSize] = useState<number>();
+
   return (
     <div className="pizza-block">
-      <img
-        className="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-        alt="Pizza"
-      />
-      <h4 className="pizza-block__title">Чизбургер-пицца</h4>
+      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {types.map((typeId) => (
+            <li
+              key={typeId}
+              className={activeType === typeId ? "active" : ""}
+              onClick={() => setActiveType(typeId)}
+            >
+              {typeNames[typeId]}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((size, idx) => (
+            <li
+              key={idx}
+              className={activeSize === idx ? "active" : ""}
+              onClick={() => setActiveSize(idx)}
+            >
+              {size} см.
+            </li>
+          ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от 395 ₽</div>
+        <div className="pizza-block__price">от {price} ₽</div>
         <div className="button button--outline button--add">
           <svg
             width="12"
