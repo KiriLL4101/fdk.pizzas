@@ -1,10 +1,10 @@
 import React from "react";
-import Categories from "./components/Categories";
-import Header from "./components/Header";
-import PizzaCard, { PizzaCardProps } from "./components/PizzaCard";
-import Sort from "./components/Sort";
+import { Route, Routes } from "react-router-dom";
 
-import pizzas from "./assets/pizzas.json";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Basket from "./pages/Basket";
+import Header from "./components/Header";
 
 import "./assets/scss/app.scss";
 
@@ -14,16 +14,11 @@ const App = () => {
       <Header />
       <div className="content">
         <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-            {pizzas.map((pizza: PizzaCardProps & { id: number }) => (
-              <PizzaCard key={pizza.id} {...pizza} />
-            ))}
-          </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/basket" element={<Basket />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
       </div>
     </div>
