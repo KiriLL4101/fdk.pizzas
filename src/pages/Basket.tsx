@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Basket = () => {
   return (
     <>
-      <div className="container container--cart">
+      <div className="container--cart">
         <div className="cart">
           <div className="cart__top">
             <h2 className="content__title">
@@ -79,7 +80,7 @@ const Basket = () => {
               <span>Очистить корзину</span>
             </div>
           </div>
-          <div className="content__items">
+          <div className="cart__items">
             <div className="cart__item">
               <div className="cart__item-img">
                 <img
@@ -391,8 +392,8 @@ const Basket = () => {
               </span>
             </div>
             <div className="cart__bottom-buttons">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="button button--outline button--add go-back-btn"
               >
                 <svg
@@ -412,7 +413,7 @@ const Basket = () => {
                 </svg>
 
                 <span>Вернуться назад</span>
-              </a>
+              </Link>
               <div className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </div>

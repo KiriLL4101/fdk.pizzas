@@ -1,4 +1,4 @@
-@import '../_variables';
+@import "../_variables";
 
 .sort {
   position: relative;
@@ -19,6 +19,15 @@
       border-bottom: 1px dashed $orange;
       cursor: pointer;
     }
+  }
+
+  &__arrow {
+    transform: rotate(90deg);
+    transition: transform 0.5s;
+  }
+
+  &__arrow.open {
+    transform: rotate(180deg);
   }
 
   &__popup {
