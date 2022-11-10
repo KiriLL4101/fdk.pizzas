@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const categories = [
   "Все",
@@ -9,17 +9,23 @@ const categories = [
   "Закрытые",
 ];
 
-const Categories: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+interface CategoriesProps {
+  categoryId: number;
+  onChangeCategories: React.Dispatch<React.SetStateAction<number>>;
+}
 
+const Categories: React.FC<CategoriesProps> = ({
+  categoryId,
+  onChangeCategories,
+}) => {
   return (
     <div className="categories">
       <ul>
         {categories.map((value, idx) => (
           <li
             key={idx}
-            onClick={() => setActiveIndex(idx)}
-            className={activeIndex === idx ? "active" : ""}
+            onClick={() => onChangeCategories(idx)}
+            className={categoryId === idx ? "active" : ""}
           >
             {value}
           </li>
