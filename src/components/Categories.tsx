@@ -1,23 +1,18 @@
-import React from "react";
+import React from 'react'
 
-const categories = [
-  "Все",
-  "Мясные",
-  "Вегетарианская",
-  "Гриль",
-  "Острые",
-  "Закрытые",
-];
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { setCategoryId } from '../redux/slices/filterSlice'
 
-interface CategoriesProps {
-  categoryId: number;
-  onChangeCategories: React.Dispatch<React.SetStateAction<number>>;
-}
+const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
-const Categories: React.FC<CategoriesProps> = ({
-  categoryId,
-  onChangeCategories,
-}) => {
+const Categories: React.FC = () => {
+  const { categoryId } = useAppSelector((state) => state.filter)
+  const dispatch = useAppDispatch()
+
+  const onChangeCategories = (id: number) => {
+    dispatch(setCategoryId(id))
+  }
+
   return (
     <div className="categories">
       <ul>
@@ -25,14 +20,14 @@ const Categories: React.FC<CategoriesProps> = ({
           <li
             key={idx}
             onClick={() => onChangeCategories(idx)}
-            className={categoryId === idx ? "active" : ""}
+            className={categoryId === idx ? 'active' : ''}
           >
             {value}
           </li>
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories

@@ -11,6 +11,7 @@
   "devDependencies": {
     "@parcel/transformer-sass": "2.8.0",
     "@parcel/transformer-svg-react": "^2.8.0",
+    "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
     "parcel": "2.8.0",
     "process": "^0.11.10",
@@ -19,10 +20,13 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-paginate": "^8.1.4",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3"
   }
 }
