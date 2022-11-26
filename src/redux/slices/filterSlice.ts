@@ -4,11 +4,15 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 export interface FilterState {
   categoryId: number
   sortBy: string
+  search: string
+  currentPage: number
 }
 
 const initialState: FilterState = {
   categoryId: 0,
   sortBy: 'rating',
+  search: '',
+  currentPage: 1,
 }
 
 export const filterSlice = createSlice({
@@ -21,9 +25,15 @@ export const filterSlice = createSlice({
     setSortBy: (state, action: PayloadAction<string>) => {
       state.sortBy = action.payload
     },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload
+    },
+    setPagination: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload
+    },
   },
 })
 
-export const { setCategoryId, setSortBy } = filterSlice.actions
+export const { setCategoryId, setSortBy, setSearch, setPagination } = filterSlice.actions
 
 export default filterSlice.reducer

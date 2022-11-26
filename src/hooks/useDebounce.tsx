@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
-import { debounce } from '../utils/debounce'
+
 import { useLatest } from './useLatest'
+import { debounce } from '../utils/debounce'
 
 export const useDebounce = (callback: Function, ms: number = 0) => {
   const callbackLatest = useLatest(callback)

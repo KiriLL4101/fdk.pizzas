@@ -1,25 +1,34 @@
-import React from "react";
-import ReactPaginate from "react-paginate";
+import React from 'react'
+import ReactPaginate from 'react-paginate'
 
-import styles from "./Pagination.module.scss";
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { setPagination } from '../../redux/slices/filterSlice'
+
+import styles from './Pagination.module.scss'
 
 interface PaginationProps {
-  currentPage: number;
-  onChangePage: (page: number) => void;
+  currentPage?: number
+  onChangePage?: (page: number) => void
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
-  currentPage,
-  onChangePage,
-}) => (
-  <ReactPaginate
-    className={styles.root}
-    breakLabel="..."
-    nextLabel=">"
-    previousLabel="<"
-    onPageChange={(event) => onChangePage(event.selected + 1)}
-    pageRangeDisplayed={4}
-    pageCount={3}
-    forcePage={currentPage - 1}
-  />
-);
+export const Pagination: React.FC<PaginationProps> = () => {
+  const currentPage = useAppSelector((state) => state.filter.currentPage)
+  const dispatch = useAppDispatch()
+
+  const onChangePage = (page: number) => {
+    dispatch(setPagination(page))
+  }
+
+  return (
+    <ReactPaginate
+      className={styles.root}
+      breakLabel="..."
+      nextLabel=">"
+      previousLabel="<"
+      onPageChange={(event) => onChangePage(event.selected + 1)}
+      pageRangeDisplayed={4}
+      pageCount={3}
+      forcePage={currentPage - 1}
+    />
+  )
+}
