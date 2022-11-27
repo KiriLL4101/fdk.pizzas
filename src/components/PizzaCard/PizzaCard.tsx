@@ -1,25 +1,25 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { addItem } from '../../redux/slices/cartSlice'
-
-export interface PizzaCardProps {
-  id: number
-  imageUrl: string
-  title: string
-  types: Array<0 | 1 | 2>
-  sizes: Array<26 | 30 | 40>
-  price: number
-  category: number
-  rating: number
-}
+import { CartItem, selectCartItemById } from '../../redux/cart/slice'
+import { addItem } from '../../redux/cart/slice'
 
 const typeNames = ['тонкое', 'традиционное']
+
+type PizzaCardProps = {
+  id: number
+  title: string
+  price: number
+  imageUrl: string
+  sizes: number[]
+  types: number[]
+  rating: number
+}
 
 const PizzaCard: React.FC<PizzaCardProps> = (props) => {
   const { id, imageUrl, title, types, sizes, price } = props
 
-  const addedCount = useAppSelector((state) => state.cart.items.filter((v) => v.id === id))
   const dispatch = useAppDispatch()
+  const addedCount = useAppSelector((state) => state.cart.items.filter((v) => v.id === id))
 
   const [activeType, setActiveType] = useState<number>(0)
   const [activeSize, setActiveSize] = useState<number>(0)

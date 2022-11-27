@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import qs from 'qs'
 
 import PizzaCard from '../components/PizzaCard/PizzaCard'
@@ -10,18 +9,42 @@ import Categories from '../components/Categories'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import useUpdateEffect from '../hooks/useUpdateEffect'
 import { Pagination } from '../components/Pagination'
-import { setFilters } from '../redux/slices/filterSlice'
+import { selectFilter, setCurrentPage, setFilters } from '../redux/filters/slice'
+import { fetchPizzas } from '../redux/pizzas/asyncAction'
+import { selectPizzaData } from '../redux/pizzas/slice'
 
 const Home: React.FC = () => {
-  const { categoryId, sortBy, search, currentPage } = useAppSelector((state) => state.filter)
-  const dispatch = useAppDispatch()
+  const { items, status } = useAppSelector(selectPizzaData)
+  const { categoryId, sort, currentPage, searchValue } = useAppSelector(selectFilter)
 
-  const [pizzas, setPizzas] = useState([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const dispatch = useAppDispatch()
 
   const isSearch = useRef(true)
 
   const navigate = useNavigate()
+
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page))
+  }
+
+  const getPizzas = async () => {
+    const sortBy = sort.sortProperty.replace('-', '')
+    const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
+    const category = categoryId > 0 ? String(categoryId) : ''
+    const search = searchValue
+
+    dispatch(
+      fetchPizzas({
+        sortBy,
+        order,
+        category,
+        search,
+        currentPage: String(currentPage),
+      }),
+    )
+
+    window.scrollTo(0, 0)
+  }
 
   useEffect(() => {
     if (window.location.search) {
@@ -33,48 +56,42 @@ const Home: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (isSearch.current) {
-      setIsLoading(true)
-      axios
-        .get(
-          `https://63808130786e112fe1b1933c.mockapi.io/items?p=${currentPage}&l=4${
-            search ? `title=${search}` : ''
-          }&sortBy=${sortBy}&order=desc${categoryId ? `&category=${categoryId}` : ''}`,
-        )
-        .then(({ data }) => {
-          setPizzas(data)
-          setIsLoading(false)
-        })
-    }
-    isSearch.current = true
-    window.scrollTo(0, 0)
-  }, [categoryId, sortBy, search, currentPage])
+    getPizzas()
+  }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
   useUpdateEffect(() => {
     const queryString = qs.stringify({
-      categoryId,
-      sortBy,
-      search,
-      currentPage,
+      sortBy: sort.sortProperty,
+      category: categoryId,
+      search: searchValue,
+      currentPage: String(currentPage),
     })
 
     navigate(`?${queryString}`)
-  }, [categoryId, sortBy, search, currentPage])
+  }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
-  const items = pizzas.map((pizza) => <PizzaCard key={pizza.id} id={pizza.id} {...pizza} />)
+  const pizzas = items.map((pizza) => <PizzaCard key={pizza.id} id={pizza.id} {...pizza} />)
 
   const skeletons = [...new Array(4)].map((_, index) => <SkeletonPizzaCard key={index} />)
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{isLoading ? skeletons : items}</div>
-      <Pagination currentPage={1} onChangePage={() => {}} />
-    </>
+      {status === 'error' ? (
+        <div className="content__error-info">
+          <h2>Произошла ошибка 😕</h2>
+          <p>К сожалению, не удалось получить питсы. Попробуйте повторить попытку позже.</p>
+        </div>
+      ) : (
+        <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
+      )}
+
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+    </div>
   )
 }
 
