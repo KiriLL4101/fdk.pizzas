@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { setSortBy } from '../redux/slices/filterSlice'
 
 import ArrowTopIcon from 'icon:../assets/img/arrow-top.svg'
+import { useOutsideClick } from '../hooks/useOutsideClick'
 
 const list = {
   rating: 'популярности',
@@ -19,24 +20,12 @@ const Sort: React.FC = () => {
 
   const sortRef = useRef(null)
 
+  useOutsideClick(sortRef, () => setIsOpen(false), isOpen)
+
   const onChangeSort = (key: string) => {
     dispatch(setSortBy(key))
     setIsOpen(false)
   }
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.body.addEventListener('click', handleClickOutside)
-
-    return () => {
-      document.body.removeEventListener('click', handleClickOutside)
-    }
-  }, [])
 
   return (
     <div ref={sortRef} className="sort">
