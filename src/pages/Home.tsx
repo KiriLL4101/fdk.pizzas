@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import qs from 'qs'
 
-import PizzaCard, { PizzaCardProps } from '../components/PizzaCard/PizzaCard'
+import PizzaCard from '../components/PizzaCard/PizzaCard'
 import { SkeletonPizzaCard } from '../components/PizzaCard'
 import Sort from '../components/Sort'
 import Categories from '../components/Categories'
@@ -26,7 +26,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1))
-      console.log(params)
 
       dispatch(setFilters(params))
       isSearch.current = false
@@ -62,9 +61,7 @@ const Home: React.FC = () => {
     navigate(`?${queryString}`)
   }, [categoryId, sortBy, search, currentPage])
 
-  const items = pizzas.map((pizza: PizzaCardProps & { id: number }) => (
-    <PizzaCard key={pizza.id} {...pizza} />
-  ))
+  const items = pizzas.map((pizza) => <PizzaCard key={pizza.id} id={pizza.id} {...pizza} />)
 
   const skeletons = [...new Array(4)].map((_, index) => <SkeletonPizzaCard key={index} />)
 

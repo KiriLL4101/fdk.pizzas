@@ -1,22 +1,41 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { addItem } from '../../redux/slices/cartSlice'
 
 export interface PizzaCardProps {
-  imageUrl: string;
-  title: string;
-  types: Array<0 | 1 | 2>;
-  sizes: Array<26 | 30 | 40>;
-  price: number;
-  category: number;
-  rating: number;
+  id: number
+  imageUrl: string
+  title: string
+  types: Array<0 | 1 | 2>
+  sizes: Array<26 | 30 | 40>
+  price: number
+  category: number
+  rating: number
 }
 
-const typeNames = ["тонкое", "традиционное"];
+const typeNames = ['тонкое', 'традиционное']
 
 const PizzaCard: React.FC<PizzaCardProps> = (props) => {
-  const { imageUrl, title, types, sizes, price } = props;
+  const { id, imageUrl, title, types, sizes, price } = props
 
-  const [activeType, setActiveType] = useState<number>();
-  const [activeSize, setActiveSize] = useState<number>();
+  const addedCount = useAppSelector((state) => state.cart.items.filter((v) => v.id === id))
+  const dispatch = useAppDispatch()
+
+  const [activeType, setActiveType] = useState<number>(0)
+  const [activeSize, setActiveSize] = useState<number>(0)
+
+  const onAddPizza = () => {
+    dispatch(
+      addItem({
+        id: id,
+        title,
+        price,
+        imageUrl,
+        type: typeNames[activeType],
+        size: sizes[activeSize],
+      }),
+    )
+  }
 
   return (
     <div className="pizza-block">
@@ -27,7 +46,7 @@ const PizzaCard: React.FC<PizzaCardProps> = (props) => {
           {types.map((typeId) => (
             <li
               key={typeId}
-              className={activeType === typeId ? "active" : ""}
+              className={activeType === typeId ? 'active' : ''}
               onClick={() => setActiveType(typeId)}
             >
               {typeNames[typeId]}
@@ -38,7 +57,7 @@ const PizzaCard: React.FC<PizzaCardProps> = (props) => {
           {sizes.map((size, idx) => (
             <li
               key={idx}
-              className={activeSize === idx ? "active" : ""}
+              className={activeSize === idx ? 'active' : ''}
               onClick={() => setActiveSize(idx)}
             >
               {size} см.
@@ -48,7 +67,7 @@ const PizzaCard: React.FC<PizzaCardProps> = (props) => {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <div className="button button--outline button--add" onClick={onAddPizza}>
           <svg
             width="12"
             height="12"
@@ -62,11 +81,11 @@ const PizzaCard: React.FC<PizzaCardProps> = (props) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {addedCount.length > 0 && <i>{addedCount.length}</i>}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PizzaCard;
+export default PizzaCard

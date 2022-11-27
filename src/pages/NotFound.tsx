@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import emptyCart from "../assets/img/empty-cart.png";
+import emptyCart from '../assets/img/empty-cart.png'
 
 const NotFound: React.FC = () => {
   return (
@@ -14,13 +15,13 @@ const NotFound: React.FC = () => {
             Для того, чтобы заказать пиццу, перейди на главную страницу.
           </p>
           <img src={emptyCart} alt="Empty cart" />
-          <a href="/" className="button button--black">
+          <Link to="/" className="button button--black">
             <span>Вернуться назад</span>
-          </a>
+          </Link>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default NotFound;
+export default NotFound
