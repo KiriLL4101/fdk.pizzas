@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 
 import { useDebounce } from '../../hooks/useDebounce'
 import { useAppDispatch } from '../../hooks/redux'
-import { setSearch } from '../../redux/slices/filterSlice'
+import { setSearchValue } from '../../redux/slices/filters'
 
 import SearchIcon from 'icon:../../assets/img/search.svg'
 import RemoveIcon from 'icon:../../assets/img/remove.svg'
@@ -14,7 +14,7 @@ const Search: React.FC = () => {
 
   const dispatch = useAppDispatch()
 
-  const setSearchDebounce = useDebounce((value) => dispatch(setSearch(value)), 200)
+  const setSearchDebounce = useDebounce((value) => dispatch(setSearchValue(value)), 200)
 
   const inputRef = useRef(null)
 

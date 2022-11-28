@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import CartIcon from 'icon:../assets/img/cart.svg'
 import TrashIcon from 'icon:../assets/img/trash.svg'
 import ArrowLeftIcon from 'icon:../assets/img/arrow-left.svg'
-import { clearItems } from '../redux/slices/cartSlice'
+import { clearItems } from '../redux/slices/cart'
 
 const Basket = () => {
   const dispatch = useAppDispatch()

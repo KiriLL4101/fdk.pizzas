@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { CartItem, selectCartItemById } from '../../redux/cart/slice'
-import { addItem } from '../../redux/cart/slice'
+import { addItem } from '../../redux/slices/cart'
 
 const typeNames = ['тонкое', 'традиционное']
 

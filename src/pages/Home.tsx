@@ -9,9 +9,9 @@ import Categories from '../components/Categories'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import useUpdateEffect from '../hooks/useUpdateEffect'
 import { Pagination } from '../components/Pagination'
-import { selectFilter, setCurrentPage, setFilters } from '../redux/filters/slice'
-import { fetchPizzas } from '../redux/pizzas/asyncAction'
-import { selectPizzaData } from '../redux/pizzas/slice'
+import { selectFilter, setCurrentPage, setFilters, SortPropertyEnum } from '../redux/slices/filters'
+import { fetchPizzas } from '../redux/slices/pizzasAsyncAction'
+import { selectPizzaData } from '../redux/slices/pizzas'
 
 const Home: React.FC = () => {
   const { items, status } = useAppSelector(selectPizzaData)
@@ -50,7 +50,17 @@ const Home: React.FC = () => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1))
 
-      dispatch(setFilters(params))
+      dispatch(
+        setFilters({
+          searchValue: params.search,
+          categoryId: params.category,
+          currentPage: params.currentPage,
+          sort: {
+            name: 'популярности',
+            sortProperty: SortPropertyEnum.RATING_DESC,
+          },
+        }),
+      )
       isSearch.current = false
     }
   }, [])

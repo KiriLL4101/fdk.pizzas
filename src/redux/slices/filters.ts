@@ -24,13 +24,6 @@ export interface FilterSliceState {
   sort: Sort
 }
 
-export interface FilterState {
-  categoryId: number
-  sortBy: string
-  search: string
-  currentPage: number
-}
-
 const initialState: FilterSliceState = {
   searchValue: '',
   categoryId: 0,
@@ -59,8 +52,8 @@ const filterSlice = createSlice({
     },
     setFilters(state, action: PayloadAction<FilterSliceState>) {
       if (Object.keys(action.payload).length) {
-        state.currentPage = Number(action.payload.currentPage)
-        state.categoryId = Number(action.payload.categoryId)
+        state.currentPage = action.payload.currentPage
+        state.categoryId = action.payload.categoryId
         state.sort = action.payload.sort
       } else {
         state.currentPage = 1

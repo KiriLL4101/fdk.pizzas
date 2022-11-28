@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from '../store'
-import { fetchPizzas } from './asyncAction'
+import { fetchPizzas } from './pizzasAsyncAction'
 
 export type Pizza = {
   id: number

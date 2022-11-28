@@ -6,7 +6,7 @@ import MinusIcon from 'icon:../assets/img/minus.svg'
 import PlusIcon from 'icon:../assets/img/plus.svg'
 import RemoveIcon from 'icon:../assets/img/remove.svg'
 
-import { addItem, CartItem, minusItem, removeItem } from '../redux/slices/cartSlice'
+import { addItem, CartItem, minusItem, removeItem } from '../redux/slices/cart'
 
 const BasketItem = (props) => {
   const { id, imageUrl, title, type, size, price, count } = props
