@@ -1,0 +1,41 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px 0;
+
+  & > div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 22px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  li {
+    cursor: pointer;
+  }
+}
+
+.contact {
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

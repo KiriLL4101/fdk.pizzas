@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+@import './assets/scss/libs/_normalize';
+
+body {
+  background: #f9f9f9;
+}
+
+.container {
+  width: calc(100vw - 100px);
+  margin: 0 auto;
+  max-width: 1290px;
+}
+
+footer {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+}

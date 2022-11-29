@@ -11,7 +11,8 @@ export type Pizza = {
   imageUrl: string
   sizes: number[]
   types: number[]
-  rating: number
+  rating: number,
+  ingredients: string
 }
 
 export enum Status {

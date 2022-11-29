@@ -1,0 +1,62 @@
+.root {
+  background: #fff;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subheader {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 10px 0;
+  background: #fff;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10;
+  cursor: pointer;
+}
+
+.avgTime {
+  flex: 1;
+
+  b {
+    margin-left: 5px;
+    font-weight: 600;
+  }
+}
+
+.header {
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.basket {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #ff7010;
+  border-radius: 4px;
+
+  span {
+    color: #fff;
+    cursor: pointer;
+  }
+}
