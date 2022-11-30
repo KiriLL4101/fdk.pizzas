@@ -15,7 +15,7 @@ export const BlockItem: React.FC<BlockItemProps> = (props) => {
 
   return (
     <div className={styles.item}>
-      <img className={styles.images} src={imageUrl} alt="Pizza" />
+      <img src={imageUrl} alt="Pizza" />
       <div className={styles.info}>
         <h4>{title}</h4>
         <p>{description}</p>
