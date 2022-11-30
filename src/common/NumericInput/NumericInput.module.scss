@@ -1,0 +1,49 @@
+.root {
+  display: flex;
+  width: 92px;
+  height: 36px;
+
+  background: #ffeee2;
+  border-radius: 6px;
+
+  button {
+    background: #ffeee2;
+    color: #ff7010;
+    border-radius: 6px;
+
+    font-weight: 600;
+    font-size: 16px;
+
+    flex: 1;
+
+    padding: 0 8px;
+
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+  }
+}
+
+.input {
+  flex: 2;
+  text-align: center;
+  line-height: 36px;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  color: #ff7010;
+
+  input {
+    border: none;
+    background: #ffeee2;
+
+    height: 100%;
+    width: 100%;
+    cursor: default;
+  }
+}

@@ -3,13 +3,14 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
-import Basket from './pages/Basket/Basket'
+import Basket from './pages/BasketOrder/BasketOrder'
 import Menu from './pages/Menu/Menu'
 
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 
 import './index.scss'
+import BasketSide from './components/BasketSide/BasketSide'
 
 const App = () => {
   const location = useLocation()
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      {/* <BasketSide /> */}
       {!location.pathname.includes('menu') && <Footer />}
     </>
   )
