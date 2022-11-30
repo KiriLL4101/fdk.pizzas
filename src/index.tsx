@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { store } from './redux/store'
 
-import { SideBarProvider } from './components/BasketSide/BasketItem.context'
+import { SideBarProvider } from './components/BasketSide/BasketSide.context'
 
 import App from './App'
 

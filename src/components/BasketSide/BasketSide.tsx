@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 
 import Portal from '../../common/Portal/Portal'
 import { Button } from '../../common/Button/Button'
-import BasketItem from './BasketItem'
+import BasketSideItem from './BasketSideItem'
 
 import RemoveIcon from 'icon:../../assets/icons/remove.svg'
 
 import * as styles from './BasketSide.module.scss'
+import { useAppSelector } from '../../hooks/redux'
 
 export interface BasketSideProps {
   isOpen: boolean
@@ -14,6 +15,8 @@ export interface BasketSideProps {
 }
 
 const BasketSide: React.FC<BasketSideProps> = ({ isOpen, onClose }) => {
+  const { items, totalPrice } = useAppSelector((state) => state.basket)
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -37,12 +40,10 @@ const BasketSide: React.FC<BasketSideProps> = ({ isOpen, onClose }) => {
           <RemoveIcon onClick={onClose} />
         </div>
         <div className={styles.content}>
-          <BasketItem />
-          <BasketItem />
-          <BasketItem />
+          {items.length > 0 && items.map((val) => <BasketSideItem key={val.id} {...val} />)}
         </div>
         <div className={styles.footer}>
-          <span>Итого: 2 379 ₽</span>
+          <span>Итого: {totalPrice} ₽</span>
           <Button>Оформить заказ</Button>
         </div>
       </div>

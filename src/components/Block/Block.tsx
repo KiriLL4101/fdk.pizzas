@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { BlockItem } from './BlockItem'
+import type { Product } from '../../redux/product/types'
 
 import * as styles from './Block.module.scss'
-import type { Product } from '../../redux/product/types'
 
 interface BlockProps {
   items: Product[keyof Product]

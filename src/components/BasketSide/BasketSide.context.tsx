@@ -1,16 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import BasketSide, { BasketSideProps } from './BasketSide'
 
 const SideBarContext = createContext(null)
 
 export function SideBarProvider({ children }) {
   const [state, setState] = useState<BasketSideProps>({ isOpen: false })
-
-  useEffect(() => {
-    if (!state.isOpen) return
-
-    onCloseHandler()
-  }, [state.isOpen])
 
   const onToggle = () => {
     setState({ onClose: onCloseHandler, isOpen: true })
