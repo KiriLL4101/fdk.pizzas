@@ -52,7 +52,7 @@ const Categories: React.FC<{ inline?: boolean }> = ({ inline }) => {
     <div className={styles.root}>
       {Object.entries(categories).map(([key, { name, Icon }], idx) =>
         inline ? (
-          <Link to={`/menu/${key}`} className={styles.inline} key={idx}>
+          <Link to={`/menu/${key}`} key={idx}>
             {name}
           </Link>
         ) : (

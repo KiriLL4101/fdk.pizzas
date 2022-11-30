@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import BasketSide, { BasketSideProps } from './BasketSide'
 
-// type ToasterContextData = (data: Partial<ToasterProps>) => void
-
 const SideBarContext = createContext(null)
 
 export function SideBarProvider({ children }) {
@@ -11,9 +9,7 @@ export function SideBarProvider({ children }) {
   useEffect(() => {
     if (!state.isOpen) return
 
-    setTimeout(() => {
-      onCloseHandler()
-    }, 5000)
+    onCloseHandler()
   }, [state.isOpen])
 
   const onToggle = () => {
@@ -35,7 +31,7 @@ export function SideBarProvider({ children }) {
 export default function useSideBar() {
   const context = useContext(SideBarContext)
   if (context === undefined) {
-    throw new Error('useToast hook must be used within a Context Provider')
+    throw new Error('useSideBar hook must be used within a Context Provider')
   }
   return context
 }
