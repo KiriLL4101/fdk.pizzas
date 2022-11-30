@@ -2,20 +2,28 @@ import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import qs from 'qs'
 
-import PizzaCard from '../components/PizzaCard/PizzaCard'
-import { SkeletonPizzaCard } from '../components/PizzaCard'
-import Sort from '../components/Sort'
-import Categories from '../components/Categories'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import useUpdateEffect from '../hooks/useUpdateEffect'
-import { Pagination } from '../components/Pagination'
-import { selectFilter, setCurrentPage, setFilters, SortPropertyEnum } from '../redux/slices/filters'
-import { fetchPizzas } from '../redux/slices/pizzasAsyncAction'
-import { selectPizzaData } from '../redux/slices/pizzas'
+// import { selectFilter, setFilters, SortPropertyEnum } from '../redux/filter/slice'
+import { fetchCombo, fetchDessert, fetchPizzas, fetchSnacks } from '../redux/product/asyncAction'
+// import { selectPizzaData } from '../redux/product/slice'
+import Categories from '../components/Categories/Categories'
+import Discount from '../components/Discount/Discount'
+import Address from '../components/Address/Address'
+import Block from '../components/Block/Block'
+
+const successfulLookup = (position) => {
+  const { latitude, longitude } = position.coords
+  fetch(
+    `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=a13c4824aa1e46c28219232d00756956`,
+  )
+    .then((response) => response.json())
+    .then(({ results }) => console.log('city: ', results[0].components.city))
+}
 
 const Home: React.FC = () => {
-  const { items, status } = useAppSelector(selectPizzaData)
-  const { categoryId, sort, currentPage, searchValue } = useAppSelector(selectFilter)
+  const { pizzas, combo, snacks, desserts } = useAppSelector((state) => state.product.products)
+  // const { categoryId, sort, currentPage, searchValue } = useAppSelector(selectFilter)
 
   const dispatch = useAppDispatch()
 
@@ -23,85 +31,81 @@ const Home: React.FC = () => {
 
   const navigate = useNavigate()
 
-  const onChangePage = (page: number) => {
-    dispatch(setCurrentPage(page))
-  }
+  // const getPizzas = async () => {
+  //   const sortBy = sort.sortProperty.replace('-', '')
+  //   const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
+  //   const category = categoryId > 0 ? String(categoryId) : ''
+  //   const search = searchValue
 
-  const getPizzas = async () => {
-    const sortBy = sort.sortProperty.replace('-', '')
-    const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
-    const category = categoryId > 0 ? String(categoryId) : ''
-    const search = searchValue
+  //   dispatch(fetchPizzas())
 
-    dispatch(
-      fetchPizzas({
-        sortBy,
-        order,
-        category,
-        search,
-        currentPage: String(currentPage),
-      }),
-    )
+  //   dispatch(fetchCombo())
 
-    window.scrollTo(0, 0)
-  }
+  //   dispatch(fetchSnacks())
+
+  //   dispatch(fetchDessert())
+
+  //   window.scrollTo(0, 0)
+  // }
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(successfulLookup, (error) => {
+  //     console.log('error: ', error)
+  //   })
+
+  //   if (window.location.search) {
+  //     const params = qs.parse(window.location.search.substring(1))
+
+  //     dispatch(
+  //       setFilters({
+  //         searchValue: params.search,
+  //         categoryId: params.category,
+  //         currentPage: params.currentPage,
+  //         sort: {
+  //           name: 'популярности',
+  //           sortProperty: SortPropertyEnum.RATING_DESC,
+  //         },
+  //       }),
+  //     )
+  //     isSearch.current = false
+  //   }
+  // }, [])
 
   useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1))
+    dispatch(fetchPizzas())
 
-      dispatch(
-        setFilters({
-          searchValue: params.search,
-          categoryId: params.category,
-          currentPage: params.currentPage,
-          sort: {
-            name: 'популярности',
-            sortProperty: SortPropertyEnum.RATING_DESC,
-          },
-        }),
-      )
-      isSearch.current = false
-    }
+    dispatch(fetchCombo())
+
+    dispatch(fetchSnacks())
+
+    dispatch(fetchDessert())
   }, [])
 
-  useEffect(() => {
-    getPizzas()
-  }, [categoryId, sort.sortProperty, searchValue, currentPage])
+  // useUpdateEffect(() => {
+  //   const queryString = qs.stringify({
+  //     sortBy: sort.sortProperty,
+  //     category: categoryId,
+  //     search: searchValue,
+  //     currentPage: String(currentPage),
+  //   })
 
-  useUpdateEffect(() => {
-    const queryString = qs.stringify({
-      sortBy: sort.sortProperty,
-      category: categoryId,
-      search: searchValue,
-      currentPage: String(currentPage),
-    })
+  //   navigate(`?${queryString}`)
+  // }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
-    navigate(`?${queryString}`)
-  }, [categoryId, sort.sortProperty, searchValue, currentPage])
+  // const pizzas = items.map((pizza) => <PizzaCard key={pizza.id} id={pizza.id} {...pizza} />)
 
-  const pizzas = items.map((pizza) => <PizzaCard key={pizza.id} id={pizza.id} {...pizza} />)
-
-  const skeletons = [...new Array(4)].map((_, index) => <SkeletonPizzaCard key={index} />)
+  // const skeletons = [...new Array(4)].map((_, index) => <SkeletonPizzaCard key={index} />)
 
   return (
-    <div className="container">
-      <div className="content__top">
-        <Categories />
-        <Sort />
-      </div>
-      <h2 className="content__title">Все пиццы</h2>
-      {status === 'error' ? (
-        <div className="content__error-info">
-          <h2>Произошла ошибка 😕</h2>
-          <p>К сожалению, не удалось получить питсы. Попробуйте повторить попытку позже.</p>
-        </div>
-      ) : (
-        <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
-      )}
-
-      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
-    </div>
+    <>
+      <Categories />
+      <Discount />
+      <Address />
+      {pizzas.length > 0 && <Block items={pizzas} title={'Пицца'} />}
+      {combo.length > 0 && <Block items={combo} title={'Комбо'} />}
+      {snacks.length > 0 && <Block items={snacks} title={'Закуски'} />}
+      {desserts.length > 0 && <Block items={desserts} title={'Десерты'} />}
+    </>
   )
 }
 

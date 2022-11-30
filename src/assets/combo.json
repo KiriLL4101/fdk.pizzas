@@ -1,0 +1,66 @@
+[
+    {
+        "id": "0",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/348fc63218624452bff8b2ac1b90db9c_584x584.png",
+        "title": "Комбо от 599 ₽",
+        "price": 599,
+        "oldPrice": 698,
+        "description": "Кому-кому только одному. Маленькая пицца, закуска, напиток и соус. Продукты в комбо можно менять"
+    },
+    {
+        "id": "1",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/69d8125b21db48aea68dcd38b074de2b_584x584.png",
+        "title": "Семейное комбо",
+        "price": 769,
+        "oldPrice": 1136,
+        "description": "Для детей и взрослых. Маленькая пицца и Миу-пицца в коробке-раскраске с игрушкой. Пиццы в комбо можно менять"
+    },
+    {
+        "id": "2",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/176bc1c4b1d54894aa28a3c1095cfa89_584x584.png",
+        "title": "3 пиццы от 799 ₽",
+        "price": 599,
+        "oldPrice": 897,
+        "description": "Настоящая дегустация. Три маленькие пиццы по суперцене. Пиццы в комбо можно менять"
+    },
+    {
+        "id": "3",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/b59d507a41074150b4c7eaab7a7561ac_584x584.png",
+        "title": "Комбо от 599 ₽",
+        "price": 989,
+        "oldPrice": 1338,
+        "description": "Парочка что надо. 2 средние пиццы. Пиццы в комбо можно менять"
+    },
+    {
+        "id": "4",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/dcf71026d1ec42109b3199f6cbd6f063_584x584.png",
+        "title": "3 пиццы",
+        "price": 999,
+        "oldPrice": 1557,
+        "description": "Три удовольствия в нашем меню — это 3 средние пиццы на ваш выбор. Пиццы в комбо можно менять"
+    },
+    {
+        "id": "5",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/fc5f12da66c24c31a78373657413b3a3_584x584.png",
+        "title": "2 пиццы и напиток",
+        "price": 839,
+        "oldPrice": 883,
+        "description": "Для уютных посиделок. 2 маленькие пиццы и напиток на выбор. Для компании из 2–4 человек. Пиццы в комбо можно менять"
+    },
+    {
+        "id": "6",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/4e93f0b1ff40464f9ee10e5cee746434_584x584.png",
+        "title": "4 Закуски",
+        "price": 609,
+        "oldPrice": 706,
+        "description": "Сытный квартет для маленькой компании. Комбо из четырех закусок на выбор"
+    },
+    {
+        "id": "7",
+        "imageUrl": "https://cdn.dodostatic.net/static/Img/ComboTemplates/365d80eb055b49eeb0459b598d1af956_584x584.png",
+        "title": "4 Закуски",
+        "price": 2419,
+        "oldPrice": 3135,
+        "description": "5 причин сделать вечеринку вкуснее. 5 средних пицц для компании из 10–15 человек. Пиццы в комбо можно менять"
+    }
+]

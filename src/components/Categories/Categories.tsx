@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import FireIcon from 'icon:../../assets/icons/fire.svg'
 import PizzaIcon from 'icon:../../assets/icons/pizza.svg'
@@ -11,51 +12,57 @@ import SauceIcon from 'icon:../../assets/icons/sauce.svg'
 
 import * as styles from './Categories.module.scss'
 
-const categories = [
-  {
+export const categories = {
+  fire: {
     Icon: FireIcon,
     name: 'Акции',
   },
-  {
+  pizzas: {
     Icon: PizzaIcon,
     name: 'Пицца',
   },
-  {
+  sushi: {
     Icon: SushiIcon,
     name: 'Суши',
   },
-  {
+  drink: {
     Icon: DrinkIcon,
     name: 'Напитки',
   },
-  {
+  snacks: {
     Icon: SnacksIcon,
     name: 'Закуски',
   },
-  {
+  combo: {
     Icon: ComboIcon,
     name: 'Комбо',
   },
-  {
+  desserts: {
     Icon: DessertIcon,
     name: 'Десерты',
   },
-  {
+  sauce: {
     Icon: SauceIcon,
     name: 'Соусы',
   },
-]
+}
 
-const Categories: React.FC = () => {
+const Categories: React.FC<{ inline?: boolean }> = ({ inline }) => {
   return (
-    <ul className={styles.root}>
-      {categories.map(({ Icon, name }, idx) => (
-        <li className={styles.item} key={idx}>
-          <Icon />
-          <span>{name}</span>
-        </li>
-      ))}
-    </ul>
+    <div className={styles.root}>
+      {Object.entries(categories).map(([key, { name, Icon }], idx) =>
+        inline ? (
+          <Link to={`/menu/${key}`} className={styles.inline} key={idx}>
+            {name}
+          </Link>
+        ) : (
+          <Link to={`/menu/${key}`} className={styles.item} key={idx}>
+            <Icon />
+            <span>{name}</span>
+          </Link>
+        ),
+      )}
+    </div>
   )
 }
 

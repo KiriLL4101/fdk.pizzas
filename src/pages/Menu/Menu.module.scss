@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.basket {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #ff7010;
+  border-radius: 4px;
+
+  span {
+    color: #fff;
+    cursor: pointer;
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 
-import PizzaLogoIcon from 'icon:../../assets/icons/pizza-logo.svg'
+import MainLogo from '../Header/MainLogo'
+
 import LocationIcon from 'icon:../../assets/icons/location.svg'
 import FacebookIcon from 'icon:../../assets/icons/facebook.svg'
 import PhoneIcon from 'icon:../../assets/icons/phone.svg'
@@ -18,10 +19,7 @@ const Footer = () => {
       <div className="container">
         <div className={styles.root}>
           <div>
-            <div className={styles.logo}>
-              <PizzaLogoIcon />
-              <span>Куда пицца</span>
-            </div>
+            <MainLogo />
             <span>© Copyright 2021 — Куда Пицца</span>
           </div>
           <div>

@@ -3,10 +3,10 @@ import React from 'react'
 import { BlockItem } from './BlockItem'
 
 import * as styles from './Block.module.scss'
-import { Pizza } from '../../redux/slices/pizzas'
+import type { Product } from '../../redux/product/types'
 
 interface BlockProps {
-  items: Pizza[]
+  items: Product[keyof Product]
   title: string
 }
 

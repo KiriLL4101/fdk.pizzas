@@ -1,10 +1,11 @@
 import React from 'react'
 
+import MainLogo from './MainLogo'
+import { BasketButton } from '../BasketButton/BasketButton'
+
 import ArrowDownIcon from 'icon:../../assets/icons/arrow-down.svg'
 import LocationIcon from 'icon:../../assets/icons/location.svg'
 import AccountIcon from 'icon:../../assets/icons/account.svg'
-import PizzaLogoIcon from 'icon:../../assets/icons/pizza-logo.svg'
-import BasketIcon from 'icon:../../assets/icons/basket.svg'
 
 import * as styles from './Header.module.scss'
 
@@ -31,14 +32,8 @@ const Header: React.FC = () => {
           </div>
         </div>
         <div className={styles.header}>
-          <div className={styles.logo}>
-            <PizzaLogoIcon />
-            <span>Куда пицца</span>
-          </div>
-          <div className={styles.basket}>
-            <BasketIcon />
-            <span>0 ₽</span>
-          </div>
+          <MainLogo />
+          <BasketButton />
         </div>
       </div>
     </header>
