@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import * as styles from './NumericInput.module.scss'
 
-const NumericInput = () => {
-  const [counter, setCounter] = useState(1)
+interface NumericInputProps {
+  counter: number
+  onChange?: (value: number) => void
+}
 
+const NumericInput: React.FC<NumericInputProps> = ({ counter = 1, onChange }) => {
   return (
     <div className={styles.root}>
-      <button onClick={() => setCounter((prev) => prev - 1)} disabled={!counter}>
+      <button onClick={() => onChange(--counter)} disabled={!counter}>
         -
       </button>
 
@@ -16,7 +19,7 @@ const NumericInput = () => {
         {/* <input type="text" value={counter} readOnly /> */}
       </span>
 
-      <button onClick={() => setCounter((prev) => prev + 1)}>+</button>
+      <button onClick={() => onChange(++counter)}>+</button>
     </div>
   )
 }
