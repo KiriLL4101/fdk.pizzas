@@ -21,10 +21,10 @@ export const basketSlice = createSlice({
       state.items.push(action.payload)
       state.totalPrice = state.items.reduce((sum, val) => val.price + sum, 0)
     },
-    // minusItem(state, action: PayloadAction<number>) {
-    //   state.items = state.items.filter((val) => val.id !== String(action.payload))
-    //   state.totalPrice = state.items.reduce((sum, val) => val.price + sum, 0)
-    // },
+    minusItem(state, action: PayloadAction<number>) {
+      state.items = state.items.filter((val) => val.id !== String(action.payload))
+      state.totalPrice = state.items.reduce((sum, val) => val.price + sum, 0)
+    },
     removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter((val) => val.id !== String(action.payload))
       state.totalPrice = state.items.reduce((sum, val) => val.price + sum, 0) 

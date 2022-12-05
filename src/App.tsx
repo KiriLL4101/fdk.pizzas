@@ -10,7 +10,6 @@ import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 
 import './index.scss'
-import BasketSide from './components/BasketSide/BasketSide'
 
 const App = () => {
   const location = useLocation()
@@ -26,7 +25,6 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      {/* <BasketSide /> */}
       {!location.pathname.includes('menu') && <Footer />}
     </>
   )
@@ -34,17 +32,3 @@ const App = () => {
 
 export default App
 
-{
-  /* <Header />
-<div className="content">
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/basket" element={<Basket />} />
-    <Route path="*" element={<NotFound />} />
-  </Routes>
-          <Categories />
-        <Discount />
-        <Address />
-        <Block items={items} title={'Пицца'} />
-</div> */
-}

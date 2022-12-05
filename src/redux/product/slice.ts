@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-// import { RootState } from '../store'
 import { fetchCombo, fetchDessert, fetchPizzas, fetchSnacks } from './asyncAction'
-import { Pizza, Product, ProductSliceState, SearchProductParams, Status } from './types'
+import { Pizza, Product, ProductSliceState, Status } from './types'
 
 const initialState: ProductSliceState = {
   products: {

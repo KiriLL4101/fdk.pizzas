@@ -16,3 +16,15 @@ footer {
   background: #ffffff;
   border: 1px solid #f0f0f0;
 }
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.relative .mb{
+  margin-bottom: 77px;
+}
