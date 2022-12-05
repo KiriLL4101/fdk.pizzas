@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import * as styles from './Button.module.scss'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string
+  children: ReactNode | string
   variant?: 'primary' | 'secondary'
 }
 

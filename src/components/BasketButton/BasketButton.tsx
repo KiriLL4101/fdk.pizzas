@@ -1,19 +1,22 @@
 import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
 
-import { useAppSelector } from '../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { showBasket } from '../../redux/basket/basket'
 
 import BasketIcon from 'icon:../../assets/icons/basket.svg'
 
 import * as styles from './BasketButton.module.scss'
-import useSideBar from '../BasketSide/BasketSide.context'
 
 export const BasketButton = memo(() => {
   const totalPrice = useAppSelector((state) => state.basket.totalPrice)
-  const onToggle = useSideBar()
+  const dispatch = useAppDispatch()
+
+  const onOpen = () => {
+    dispatch(showBasket())
+  }
 
   return (
-    <div className={styles.basket} onClick={onToggle}>
+    <div className={styles.basket} onClick={onOpen}>
       <BasketIcon />
       <span>{totalPrice} ₽</span>
     </div>
