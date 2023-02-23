@@ -9,9 +9,9 @@ export const OrderForm = () => {
   const { items } = useAppSelector((state) => state.basket)
 
   return (
-    <div className={styles.root}>
+    <div>
       <h1>Ваш заказ</h1>
-      <div className={styles.wrapper}>
+      <div>
         {items.length > 0 &&
           Object.entries(groupBy(items, 'id')).map(([id, pizza]) => {
             const priceSum = pizza.reduce((sum, val) => (sum += val.price), 0)
