@@ -18,10 +18,9 @@ const BasketSideItem: React.FC<BasketSideItemProps> = ({ imageUrl, title, price,
       <div className={styles.info}>
         <h6>{title}</h6>
         <p>Традиционное тесто, 23 см</p>
-        <div>
-          <NumericInput counter={counter} onChange={(value) => console.log(value)} />
-          <span>{price} ₽</span>
-        </div>
+        <div style={{ flex: 1 }} />
+        <NumericInput counter={counter} onChange={(value) => console.log(value)} />
+        <span>{price} ₽</span>
       </div>
     </div>
   )

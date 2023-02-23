@@ -12,7 +12,7 @@ export interface BasketSliceState {
 const initialState: BasketSliceState = {
   items: [],
   totalPrice: 0,
-  visibleBar: true,
+  visibleBar: false,
 }
 
 export const basketSlice = createSlice({
